@@ -16,6 +16,7 @@ dependencies:
     freezed_annotation: ^1.1.0
     geolocator: ^8.0.1
     get_it: ^7.2.0
+    google_fonts: ^2.1.1
     injectable: ^1.5.0
     intl: ^0.17.0
     json_serializable: ^6.1.3
