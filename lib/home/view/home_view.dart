@@ -1,3 +1,4 @@
+import 'package:bweather/home/view/widgets/background_canvas.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -5,6 +6,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const Scaffold(
+      body: BackgroundCanvas(),
+    );
   }
 }
