@@ -5,6 +5,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+import 'package:bweather/home/home.dart';
 import 'package:bweather/l10n/l10n.dart';
 import 'package:bweather/theme.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class App extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const HomePage(),
     );
   }
 }
