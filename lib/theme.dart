@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const tangyOrange = Color(0xFFF8B500);
-const mangoYellow = Color(0xFFFFCF00);
-const blueberryBlue = Color(0xFF00A1E0);
-const brinjalWhite = Color(0xFFF5F5F5);
+const tangyOrange = Color(0xFFFF6054);
+const mangoYellow = Color(0xFFFA9556);
+const blueberryBlue = Color(0xFF393E5B);
+const brinjalWhite = Color(0xFFEDE6CA);
 
 final ThemeData myThemeDataLight = ThemeData(
   textTheme: GoogleFonts.ralewayTextTheme(
