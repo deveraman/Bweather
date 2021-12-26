@@ -6,12 +6,6 @@ class BackgroundCanvas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: RainyPainter(),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-      ),
-    );
+    return const RainyBackground();
   }
 }
