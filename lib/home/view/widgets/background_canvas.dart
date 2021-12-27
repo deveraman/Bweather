@@ -1,4 +1,4 @@
-import 'package:bweather/home/view/widgets/rainy_painter.dart';
+import 'package:bweather/home/view/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundCanvas extends StatelessWidget {
