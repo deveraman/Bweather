@@ -32,24 +32,12 @@ class RainyBackground extends HookWidget {
     useAnimation(_animationController);
     useAnimation(_secondAnimationController);
 
-    useEffect(
-      () {
-        _animationController.forward();
-
-        return _animationController.dispose;
-      },
-      [_animationController],
-    );
-
-    if (_animationController.isCompleted) {
-      useEffect(
-        () {
-          _secondAnimationController.forward();
-          return _secondAnimationController.dispose;
-        },
-        [_secondAnimationController],
-      );
-    }
+    useEffect(() {
+      _animationController.forward();
+      if (_animationController.isCompleted) {
+        _secondAnimationController.forward();
+      }
+    });
 
     return Stack(
       children: [
@@ -129,17 +117,17 @@ class RainyLines extends CustomPainter {
     canvas
       ..drawLine(
         Offset(size.width * 0.75, size.height * 0.85),
-        Offset(size.width * 0.75, size.height * 0.73),
+        Offset(size.width * 0.75, size.height * 0.7),
         whiteLine,
       )
       ..drawLine(
         Offset(size.width * 0.725, size.height * 1),
-        Offset(size.width * 0.725, size.height * 0.73),
+        Offset(size.width * 0.725, size.height * 0.7),
         whiteLine,
       )
       ..drawLine(
         Offset(size.width * 0.70, size.height * 0.95),
-        Offset(size.width * 0.70, size.height * 0.73),
+        Offset(size.width * 0.70, size.height * 0.7),
         whiteLine,
       );
 
