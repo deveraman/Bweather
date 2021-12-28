@@ -19,7 +19,8 @@ class App extends StatelessWidget {
     return MaterialApp(
       darkTheme: myThemeDataDark,
       theme: myThemeDataLight,
-      showPerformanceOverlay: true,
+      debugShowCheckedModeBanner: false,
+      // showPerformanceOverlay: true,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
