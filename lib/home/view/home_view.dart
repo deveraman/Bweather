@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_templates/home/home.dart';
-import 'package:flutter_templates/home/view/widgets/user_tile.dart';
 import 'package:flutter_templates/shared_widgets/shared_widgets.dart';
 
 class HomeView extends StatelessWidget {
@@ -9,23 +8,43 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(
-      builder: (context, state) {
-        switch (state.status) {
-          case UserStatus.loading:
-            return const LoadingIndicator();
-          case UserStatus.success:
-            return ListView.builder(
-              itemBuilder: (BuildContext context, int index) {
-                return UserTile(user: state.users[index]);
-              },
-            );
-          case UserStatus.failure:
-            return const LoadingError();
-          default:
-            return const LoadingIndicator();
-        }
-      },
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          BlocBuilder<WeatherBloc, WeatherState>(
+            builder: (context, state) {
+              switch (state.status) {
+                case WeatherStatus.loading:
+                  return const LoadingIndicator();
+                case WeatherStatus.success:
+                  return Text(
+                      'Current Temp: ${state.weather!.current.temp.toString()}');
+                case WeatherStatus.failure:
+                  return const LoadingError();
+                default:
+                  return const LoadingIndicator();
+              }
+            },
+          ),
+          BlocBuilder<AqiBloc, AqiState>(
+            builder: (context, state) {
+              switch (state.status) {
+                case AqiStatus.loading:
+                  return const LoadingIndicator();
+                case AqiStatus.success:
+                  return Text(
+                      'Current PM 2.5 Level: ${state.aqi!.list.first.components['pm2_5'].toString()}');
+                case AqiStatus.failure:
+                  return const LoadingError();
+                default:
+                  return const LoadingIndicator();
+              }
+            },
+          )
+        ],
+      ),
     );
   }
 }

@@ -1,6 +1,6 @@
 part of 'home_bloc.dart';
 
 @immutable
-abstract class HomeEvent {}
-
-class UserFetched extends HomeEvent {}
+abstract class HomeEvent {
+  const HomeEvent();
+}

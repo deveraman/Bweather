@@ -12,8 +12,18 @@ class HomePage extends StatelessWidget {
         title: const Text('Bloc Template'),
         centerTitle: true,
       ),
-      body: BlocProvider<HomeBloc>(
-        create: (context) => HomeBloc()..add(UserFetched()),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider<HomeBloc>(
+            create: (context) => HomeBloc(),
+          ),
+          BlocProvider<WeatherBloc>(
+            create: (context) => WeatherBloc()..add(WeatherFetched()),
+          ),
+          BlocProvider<AqiBloc>(
+            create: (context) => AqiBloc()..add(AqiFetched()),
+          ),
+        ],
         child: const HomeView(),
       ),
     );
