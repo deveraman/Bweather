@@ -14,8 +14,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     try {
       if (state.status == HomeStatus.initial) {
         emit(const HomeLoading());
-      } else if (state.status == HomeStatus.loading) {
-        emit(const HomeSuccess());
       }
     } catch (e) {
       return emit(const HomeFailure());
