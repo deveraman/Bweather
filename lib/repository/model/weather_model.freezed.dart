@@ -1088,7 +1088,7 @@ class _$DailyTearOff {
       @JsonKey(name: 'wind_gust') double windGust = 0.0,
       required List<Weather> weather,
       required int clouds,
-      required int pop,
+      required double pop,
       required double uvi}) {
     return _Daily(
       dt: dt,
@@ -1144,7 +1144,7 @@ mixin _$Daily {
   double get windGust => throw _privateConstructorUsedError;
   List<Weather> get weather => throw _privateConstructorUsedError;
   int get clouds => throw _privateConstructorUsedError;
-  int get pop => throw _privateConstructorUsedError;
+  double get pop => throw _privateConstructorUsedError;
   double get uvi => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1173,7 +1173,7 @@ abstract class $DailyCopyWith<$Res> {
       @JsonKey(name: 'wind_gust') double windGust,
       List<Weather> weather,
       int clouds,
-      int pop,
+      double pop,
       double uvi});
 
   $TempCopyWith<$Res> get temp;
@@ -1277,7 +1277,7 @@ class _$DailyCopyWithImpl<$Res> implements $DailyCopyWith<$Res> {
       pop: pop == freezed
           ? _value.pop
           : pop // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       uvi: uvi == freezed
           ? _value.uvi
           : uvi // ignore: cast_nullable_to_non_nullable
@@ -1322,7 +1322,7 @@ abstract class _$DailyCopyWith<$Res> implements $DailyCopyWith<$Res> {
       @JsonKey(name: 'wind_gust') double windGust,
       List<Weather> weather,
       int clouds,
-      int pop,
+      double pop,
       double uvi});
 
   @override
@@ -1429,7 +1429,7 @@ class __$DailyCopyWithImpl<$Res> extends _$DailyCopyWithImpl<$Res>
       pop: pop == freezed
           ? _value.pop
           : pop // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       uvi: uvi == freezed
           ? _value.uvi
           : uvi // ignore: cast_nullable_to_non_nullable
@@ -1503,7 +1503,7 @@ class _$_Daily implements _Daily {
   @override
   final int clouds;
   @override
-  final int pop;
+  final double pop;
   @override
   final double uvi;
 
@@ -1588,7 +1588,7 @@ abstract class _Daily implements Daily {
       @JsonKey(name: 'wind_gust') double windGust,
       required List<Weather> weather,
       required int clouds,
-      required int pop,
+      required double pop,
       required double uvi}) = _$_Daily;
 
   factory _Daily.fromJson(Map<String, dynamic> json) = _$_Daily.fromJson;
@@ -1632,7 +1632,7 @@ abstract class _Daily implements Daily {
   @override
   int get clouds;
   @override
-  int get pop;
+  double get pop;
   @override
   double get uvi;
   @override
@@ -2119,7 +2119,7 @@ Minutely _$MinutelyFromJson(Map<String, dynamic> json) {
 class _$MinutelyTearOff {
   const _$MinutelyTearOff();
 
-  _Minutely call({required int dt, required int precipitation}) {
+  _Minutely call({required int dt, required double precipitation}) {
     return _Minutely(
       dt: dt,
       precipitation: precipitation,
@@ -2137,7 +2137,7 @@ const $Minutely = _$MinutelyTearOff();
 /// @nodoc
 mixin _$Minutely {
   int get dt => throw _privateConstructorUsedError;
-  int get precipitation => throw _privateConstructorUsedError;
+  double get precipitation => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -2149,7 +2149,7 @@ mixin _$Minutely {
 abstract class $MinutelyCopyWith<$Res> {
   factory $MinutelyCopyWith(Minutely value, $Res Function(Minutely) then) =
       _$MinutelyCopyWithImpl<$Res>;
-  $Res call({int dt, int precipitation});
+  $Res call({int dt, double precipitation});
 }
 
 /// @nodoc
@@ -2173,7 +2173,7 @@ class _$MinutelyCopyWithImpl<$Res> implements $MinutelyCopyWith<$Res> {
       precipitation: precipitation == freezed
           ? _value.precipitation
           : precipitation // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ));
   }
 }
@@ -2183,7 +2183,7 @@ abstract class _$MinutelyCopyWith<$Res> implements $MinutelyCopyWith<$Res> {
   factory _$MinutelyCopyWith(_Minutely value, $Res Function(_Minutely) then) =
       __$MinutelyCopyWithImpl<$Res>;
   @override
-  $Res call({int dt, int precipitation});
+  $Res call({int dt, double precipitation});
 }
 
 /// @nodoc
@@ -2208,7 +2208,7 @@ class __$MinutelyCopyWithImpl<$Res> extends _$MinutelyCopyWithImpl<$Res>
       precipitation: precipitation == freezed
           ? _value.precipitation
           : precipitation // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ));
   }
 }
@@ -2224,7 +2224,7 @@ class _$_Minutely implements _Minutely {
   @override
   final int dt;
   @override
-  final int precipitation;
+  final double precipitation;
 
   @override
   String toString() {
@@ -2259,7 +2259,7 @@ class _$_Minutely implements _Minutely {
 }
 
 abstract class _Minutely implements Minutely {
-  const factory _Minutely({required int dt, required int precipitation}) =
+  const factory _Minutely({required int dt, required double precipitation}) =
       _$_Minutely;
 
   factory _Minutely.fromJson(Map<String, dynamic> json) = _$_Minutely.fromJson;
@@ -2267,7 +2267,7 @@ abstract class _Minutely implements Minutely {
   @override
   int get dt;
   @override
-  int get precipitation;
+  double get precipitation;
   @override
   @JsonKey(ignore: true)
   _$MinutelyCopyWith<_Minutely> get copyWith =>

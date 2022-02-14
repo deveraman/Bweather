@@ -11,7 +11,7 @@ class AQIRepository extends OpenWeatherAQIRepository {
   Future<AirQualityModel> getAQI() async {
     final res = await httpClient.get(
       Uri.parse(
-        'https://api.openweathermap.org/data/2.5/air_pollution?lat=33.44&lon=-94.04&appid=$apiKEY',
+        'https://api.openweathermap.org/data/2.5/air_pollution?lat=26.8467&lon=80.9462&units=metric&appid=$apiKEY',
       ),
     );
 

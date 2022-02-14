@@ -10,12 +10,6 @@ class MyAppBlocObserver extends BlocObserver {
   }
 
   @override
-  void onTransition(Bloc bloc, Transition transition) {
-    super.onTransition(bloc, transition);
-    developer.log('$transition');
-  }
-
-  @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
     developer.log('onError(${bloc.runtimeType}, $error, $stackTrace)');
     super.onError(bloc, error, stackTrace);

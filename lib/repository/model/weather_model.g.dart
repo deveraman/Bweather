@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: non_constant_identifier_names
+
 part of 'weather_model.dart';
 
 // **************************************************************************
@@ -99,12 +101,20 @@ const _$DescriptionEnumMap = {
   Description.OVERCAST_CLOUDS: 'overcast clouds',
   Description.BROKEN_CLOUDS: 'broken clouds',
   Description.MODERATE_RAIN: 'moderate rain',
+  Description.HAZY: 'haze',
+  Description.MISTY: 'mist',
+  Description.SNOW: 'snow',
+  Description.LIGHT_SNOW: 'light snow',
+  Description.LIGHT_RAIN: 'light rain',
 };
 
 const _$MainEnumMap = {
   Main.CLEAR: 'Clear',
   Main.CLOUDS: 'Clouds',
   Main.RAIN: 'Rain',
+  Main.HAZE: 'Haze',
+  Main.MIST: 'Mist',
+  Main.Snow: 'Snow',
 };
 
 _$_Daily _$$_DailyFromJson(Map<String, dynamic> json) => _$_Daily(
@@ -126,7 +136,7 @@ _$_Daily _$$_DailyFromJson(Map<String, dynamic> json) => _$_Daily(
           .map((e) => Weather.fromJson(e as Map<String, dynamic>))
           .toList(),
       clouds: json['clouds'] as int,
-      pop: json['pop'] as int,
+      pop: (json['pop'] as num).toDouble(),
       uvi: (json['uvi'] as num).toDouble(),
     );
 
@@ -186,7 +196,7 @@ Map<String, dynamic> _$$_TempToJson(_$_Temp instance) => <String, dynamic>{
 
 _$_Minutely _$$_MinutelyFromJson(Map<String, dynamic> json) => _$_Minutely(
       dt: json['dt'] as int,
-      precipitation: json['precipitation'] as int,
+      precipitation: (json['precipitation'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$_MinutelyToJson(_$_Minutely instance) =>

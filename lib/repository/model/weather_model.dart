@@ -2,6 +2,8 @@
 //
 //     final weatherModel = weatherModelFromJson(jsonString);
 
+// ignore_for_file: invalid_annotation_target, constant_identifier_names
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'weather_model.freezed.dart';
@@ -74,7 +76,17 @@ enum Description {
   @JsonValue("broken clouds")
   BROKEN_CLOUDS,
   @JsonValue("moderate rain")
-  MODERATE_RAIN
+  MODERATE_RAIN,
+  @JsonValue("haze")
+  HAZY,
+  @JsonValue("mist")
+  MISTY,
+  @JsonValue("snow")
+  SNOW,
+  @JsonValue("light snow")
+  LIGHT_SNOW,
+  @JsonValue("light rain")
+  LIGHT_RAIN
 }
 
 enum Main {
@@ -83,7 +95,13 @@ enum Main {
   @JsonValue('Clouds')
   CLOUDS,
   @JsonValue('Rain')
-  RAIN
+  RAIN,
+  @JsonValue('Haze')
+  HAZE,
+  @JsonValue('Mist')
+  MIST,
+  @JsonValue('Snow')
+  Snow
 }
 
 @freezed
@@ -105,7 +123,7 @@ class Daily with _$Daily {
     @JsonKey(name: 'wind_gust') @Default(0.0) double windGust,
     required List<Weather> weather,
     required int clouds,
-    required int pop,
+    required double pop,
     required double uvi,
   }) = _Daily;
 
@@ -143,7 +161,7 @@ class Temp with _$Temp {
 class Minutely with _$Minutely {
   const factory Minutely({
     required int dt,
-    required int precipitation,
+    required double precipitation,
   }) = _Minutely;
 
   factory Minutely.fromJson(Map<String, dynamic> json) =>
