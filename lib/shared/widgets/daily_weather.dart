@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templates/constants/constants.dart';
-import 'package:flutter_templates/constants/theme.dart';
 import 'package:flutter_templates/repository/repository.dart';
+import 'package:flutter_templates/utility.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 class DailyWeather extends StatelessWidget {
@@ -28,10 +29,8 @@ class DailyWeather extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Icon(
-                  Icons.circle,
-                  color: MyTheme.fireOpal,
-                ),
+                FaIcon(getIconFromWeather(
+                    dailyData[index].weather.first.description.name)),
               ],
             ),
           ),

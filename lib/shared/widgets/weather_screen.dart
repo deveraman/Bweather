@@ -4,6 +4,8 @@ import 'package:flutter_templates/constants/theme.dart';
 import 'package:flutter_templates/repository/repository.dart';
 import 'package:flutter_templates/saved_locations/saved_locations.dart';
 import 'package:flutter_templates/shared/shared.dart';
+import 'package:flutter_templates/utility.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 class WeatherScreen extends StatelessWidget {
@@ -23,7 +25,7 @@ class WeatherScreen extends StatelessWidget {
     return SingleChildScrollView(
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.only(bottom: 12, left: 12, top: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -51,31 +53,34 @@ class WeatherScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const SavedLocationPage(),
-                            ),
-                          );
-                        },
-                        icon: const Icon(Icons.add),
-                      ),
-                      Constants.gap10w,
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.search),
-                      ),
-                      Constants.gap10w,
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.menu),
-                      )
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(right: 12.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const SavedLocationPage(),
+                              ),
+                            );
+                          },
+                          icon: const FaIcon(FontAwesomeIcons.plus),
+                        ),
+                        Constants.gap10w,
+                        IconButton(
+                          onPressed: () {},
+                          icon: const FaIcon(FontAwesomeIcons.search),
+                        ),
+                        Constants.gap10w,
+                        IconButton(
+                          onPressed: () {},
+                          icon: const FaIcon(FontAwesomeIcons.bars),
+                        )
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -85,13 +90,13 @@ class WeatherScreen extends StatelessWidget {
                   Positioned(
                     top: height * 0.05,
                     left: width * 0.25,
-                    child: Container(
-                      height: 300,
-                      width: 300,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: MyTheme.fireOpal,
-                      ),
+                    // TODO: Make this dynamic and react to weather condition,
+                    // If possible have it animated or gradient at least.
+                    child: FaIcon(
+                      getIconFromWeather(
+                          weatherData.current.weather.first.description.name),
+                      color: MyTheme.eerieBlack,
+                      size: MediaQuery.of(context).size.height * 0.35,
                     ),
                   ),
                   RotatedBox(
@@ -99,7 +104,7 @@ class WeatherScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         Constants.gap40w,
-                        const Icon(Icons.circle, size: 15),
+                        const FaIcon(FontAwesomeIcons.umbrella, size: 15),
                         Constants.gap5w,
                         Text(
                           ' ${weatherData.current.uvi.toStringAsFixed(0)}',
@@ -162,7 +167,16 @@ class WeatherScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Constants.gap10w,
-                                const Icon(Icons.thermostat, size: 20),
+                                // TODO: Make this dynamic,
+                                // Based on the temperature change icon
+                                // FontAwesome has multiple icons for different
+                                // conditions and temperature ranges.
+                                FaIcon(
+                                  getIconFromTemp(int.parse(weatherData
+                                      .current.temp
+                                      .toStringAsFixed(0))),
+                                  size: 20,
+                                ),
                                 Constants.gap5w,
                                 Text(
                                   ' ${weatherData.current.feelsLike.toStringAsFixed(0)}',
@@ -172,7 +186,7 @@ class WeatherScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Constants.gap20w,
-                                const Icon(Icons.water, size: 20),
+                                const FaIcon(FontAwesomeIcons.water, size: 20),
                                 Constants.gap5w,
                                 Text(
                                   ' ${weatherData.current.humidity.toString()}%',
@@ -182,7 +196,7 @@ class WeatherScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Constants.gap20w,
-                                const Icon(Icons.air, size: 20),
+                                const FaIcon(FontAwesomeIcons.wind, size: 20),
                                 Constants.gap5w,
                                 Text(
                                   ' ${weatherData.current.windSpeed.toString()} m/s',
@@ -220,8 +234,8 @@ class WeatherScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Constants.gap40h,
               // Horizontal View Hourly Weather Data
+              Constants.gap40h,
               SizedBox(
                 height: height * 0.2,
                 width: width,
@@ -229,11 +243,11 @@ class WeatherScreen extends StatelessWidget {
               ),
               Constants.gap40h,
               // Vertical View Daily Weather Data
-              SizedBox(
-                height: height * 0.5,
-                width: double.infinity,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5.0),
+              Padding(
+                padding: const EdgeInsets.only(right: 12.0),
+                child: SizedBox(
+                  height: height * 0.51,
+                  width: double.infinity,
                   child: DailyWeather(dailyData: weatherData.daily),
                 ),
               ),

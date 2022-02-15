@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templates/constants/constants.dart';
-import 'package:flutter_templates/constants/theme.dart';
 import 'package:flutter_templates/repository/repository.dart';
+import 'package:flutter_templates/utility.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 class HourlyWeather extends StatelessWidget {
@@ -31,13 +32,13 @@ class HourlyWeather extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const Icon(
-            Icons.circle,
-            color: MyTheme.fireOpal,
+          FaIcon(
+            getIconFromWeather(
+                hourlyData[index].weather.first.description.name),
           ),
           Row(
             children: [
-              const Icon(Icons.air, size: 20),
+              const FaIcon(FontAwesomeIcons.wind, size: 20),
               Constants.gap5w,
               Text('${hourlyData[index].windSpeed.toStringAsFixed(0)}m/s'),
             ],
