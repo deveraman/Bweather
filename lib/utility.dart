@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
 // TODO: replace these with animated icons, Preferably Rive or Lottie
@@ -81,15 +80,4 @@ Future<Position> determinePosition() async {
   // When we reach here, permissions are granted and we can
   // continue accessing the position of the device.
   return await Geolocator.getCurrentPosition();
-}
-
-Future<String?> getCityNameFromCoordinates(double latitude, longitude) async {
-  List<Placemark> placemark =
-      await placemarkFromCoordinates(latitude, longitude);
-  return placemark[0].locality;
-}
-
-Future<Map<String, dynamic>> getCoordinatesFromCityName(String cityName) async {
-  List<Location> location = await locationFromAddress(cityName);
-  return location[0].toJson();
 }

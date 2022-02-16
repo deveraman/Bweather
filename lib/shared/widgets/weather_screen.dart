@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templates/constants/constants.dart';
 import 'package:flutter_templates/constants/theme.dart';
 import 'package:flutter_templates/repository/repository.dart';
-import 'package:flutter_templates/saved_locations/saved_locations.dart';
 import 'package:flutter_templates/shared/shared.dart';
+import 'package:flutter_templates/shared/widgets/search_screen.dart';
 import 'package:flutter_templates/utility.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -59,26 +59,16 @@ class WeatherScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 12.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const SavedLocationPage(),
-                              ),
-                            );
-                          },
-                          icon: const FaIcon(FontAwesomeIcons.plus),
-                        ),
-                        Constants.gap10w,
-                        IconButton(
-                          onPressed: () {},
-                          icon: const FaIcon(FontAwesomeIcons.search),
-                        ),
-                      ],
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const SearchScreen(),
+                          ),
+                        );
+                      },
+                      icon: const FaIcon(FontAwesomeIcons.search),
                     ),
                   ),
                 ],
@@ -88,26 +78,39 @@ class WeatherScreen extends StatelessWidget {
                   : Constants.gap20h,
               Stack(
                 children: [
-                  Positioned(
-                    top: orientation == Orientation.landscape
-                        ? height * 0.1
-                        : height * 0.15,
-                    left: orientation == Orientation.landscape
-                        ? width * 0.3
-                        : width <= 370
-                            ? width * 0.2
-                            : width * 0.12,
-                    // TODO: Make this dynamic and react to weather condition,
-                    // If possible have it animated or gradient at least.
-                    child: FaIcon(
-                      getIconFromWeather(
-                          weatherData.current.weather.first.description.name),
-                      color: MyTheme.eerieBlack,
-                      size: orientation == Orientation.landscape
-                          ? height * 0.5
-                          : height * 0.28,
+                  Positioned.fill(
+                    bottom: height * 0.15,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: FaIcon(
+                        getIconFromWeather(
+                            weatherData.current.weather.first.description.name),
+                        color: MyTheme.eerieBlack,
+                        size: orientation == Orientation.landscape
+                            ? height * 0.5
+                            : height * 0.25,
+                      ),
                     ),
-                  ),
+                  ), // Positioned(
+                  //   top: orientation == Orientation.landscape
+                  //       ? height * 0.1
+                  //       : height * 0.15,
+                  //   left: orientation == Orientation.landscape
+                  //       ? width * 0.3
+                  //       : width <= 370
+                  //           ? width * 0.2
+                  //           : width * 0.12,
+                  //   // TODO: Make this dynamic and react to weather condition,
+                  //   // If possible have it animated or gradient at least.
+                  //   child: FaIcon(
+                  //     getIconFromWeather(
+                  //         weatherData.current.weather.first.description.name),
+                  //     color: MyTheme.eerieBlack,
+                  //     size: orientation == Orientation.landscape
+                  //         ? height * 0.5
+                  //         : height * 0.28,
+                  //   ),
+                  // ),
                   RotatedBox(
                     quarterTurns: orientation == Orientation.landscape ? 4 : 1,
                     child: Row(

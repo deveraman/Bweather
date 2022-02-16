@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_templates/repository/repository.dart';
-import 'package:flutter_templates/utility.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:http/http.dart' as http;
 
 class WeatherRepository extends OpenWeatherRepository {
@@ -26,7 +26,7 @@ class WeatherRepository extends OpenWeatherRepository {
 
   Future getWeatherByCity(String cityName) async {
     Map<String, dynamic> coordinates =
-        await getCoordinatesFromCityName(cityName);
+        await locationFromAddress(cityName).then((res) => res[0].toJson());
 
     final res = await httpClient.get(
       Uri.parse(
