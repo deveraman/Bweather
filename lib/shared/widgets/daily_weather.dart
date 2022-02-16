@@ -12,11 +12,14 @@ class DailyWeather extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      shrinkWrap: true,
       itemBuilder: (context, index) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.55,
+            width: MediaQuery.of(context).orientation == Orientation.landscape
+                ? MediaQuery.of(context).size.width * 0.5
+                : MediaQuery.of(context).size.width * 0.55,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

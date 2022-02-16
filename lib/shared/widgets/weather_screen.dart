@@ -21,11 +21,12 @@ class WeatherScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final orientation = MediaQuery.of(context).orientation;
 
     return SingleChildScrollView(
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 12, left: 12, top: 12),
+          padding: const EdgeInsets.only(left: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -74,62 +75,69 @@ class WeatherScreen extends StatelessWidget {
                           onPressed: () {},
                           icon: const FaIcon(FontAwesomeIcons.search),
                         ),
-                        Constants.gap10w,
-                        IconButton(
-                          onPressed: () {},
-                          icon: const FaIcon(FontAwesomeIcons.bars),
-                        )
                       ],
                     ),
                   ),
                 ],
               ),
-              Constants.gap20h,
+              orientation == Orientation.landscape
+                  ? Constants.gap5h
+                  : Constants.gap20h,
               Stack(
                 children: [
                   Positioned(
-                    top: height * 0.05,
-                    left: width * 0.25,
+                    top: orientation == Orientation.landscape
+                        ? height * 0.1
+                        : height * 0.15,
+                    left: orientation == Orientation.landscape
+                        ? width * 0.3
+                        : width <= 370
+                            ? width * 0.2
+                            : width * 0.12,
                     // TODO: Make this dynamic and react to weather condition,
                     // If possible have it animated or gradient at least.
                     child: FaIcon(
                       getIconFromWeather(
                           weatherData.current.weather.first.description.name),
                       color: MyTheme.eerieBlack,
-                      size: MediaQuery.of(context).size.height * 0.35,
+                      size: orientation == Orientation.landscape
+                          ? height * 0.5
+                          : height * 0.28,
                     ),
                   ),
                   RotatedBox(
-                    quarterTurns: 1,
+                    quarterTurns: orientation == Orientation.landscape ? 4 : 1,
                     child: Row(
                       children: [
-                        Constants.gap40w,
-                        const FaIcon(FontAwesomeIcons.umbrella, size: 15),
+                        orientation == Orientation.landscape
+                            ? const SizedBox.shrink()
+                            : Constants.gap40w,
+                        const FaIcon(FontAwesomeIcons.umbrella, size: 20),
                         Constants.gap5w,
                         Text(
                           ' ${weatherData.current.uvi.toStringAsFixed(0)}',
                           style: const TextStyle(
-                            fontSize: 15,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Constants.gap20w,
-                        const Icon(Icons.visibility, size: 15),
+                        const Icon(Icons.visibility, size: 20),
                         Constants.gap5w,
                         Text(
                           ' ${weatherData.current.visibility.toString()}m',
                           style: const TextStyle(
-                            fontSize: 15,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Constants.gap20w,
-                        const Icon(Icons.compress, size: 15),
+                        const Icon(Icons.compress, size: 20),
                         Constants.gap5w,
                         Text(
                           ' ${weatherData.current.pressure.toString()} hPa',
                           style: const TextStyle(
-                            fontSize: 15,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -137,7 +145,7 @@ class WeatherScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: height * 0.7,
+                    height: height < 700 ? height * 0.85 : height * 0.7,
                     width: width,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -163,7 +171,7 @@ class WeatherScreen extends StatelessWidget {
                                 fontSize: 35,
                               ),
                             ),
-                            Constants.gap10h,
+                            Constants.gap20h,
                             Row(
                               children: [
                                 Constants.gap10w,
@@ -237,7 +245,9 @@ class WeatherScreen extends StatelessWidget {
               // Horizontal View Hourly Weather Data
               Constants.gap40h,
               SizedBox(
-                height: height * 0.2,
+                height: orientation == Orientation.landscape
+                    ? height * 0.3
+                    : height * 0.2,
                 width: width,
                 child: HourlyWeather(hourlyData: weatherData.hourly),
               ),
@@ -245,11 +255,7 @@ class WeatherScreen extends StatelessWidget {
               // Vertical View Daily Weather Data
               Padding(
                 padding: const EdgeInsets.only(right: 12.0),
-                child: SizedBox(
-                  height: height * 0.51,
-                  width: double.infinity,
-                  child: DailyWeather(dailyData: weatherData.daily),
-                ),
+                child: DailyWeather(dailyData: weatherData.daily),
               ),
             ],
           ),
