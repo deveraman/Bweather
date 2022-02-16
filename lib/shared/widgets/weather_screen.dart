@@ -13,9 +13,12 @@ class WeatherScreen extends StatelessWidget {
   /// Widget to display retrieved data from OpenWeather API.
   /// ---
   /// [required] populated WeatherModel.
-  const WeatherScreen({Key? key, required this.weatherData}) : super(key: key);
+  const WeatherScreen(
+      {Key? key, required this.weatherData, required this.cityName})
+      : super(key: key);
 
   final WeatherModel weatherData;
+  final String cityName;
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +39,9 @@ class WeatherScreen extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Lucknow',
-                        style: TextStyle(
+                      Text(
+                        cityName,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
                         ),

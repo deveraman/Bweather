@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_templates/repository/repository.dart';
+import 'package:flutter_templates/utility.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
@@ -21,9 +22,12 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     try {
       if (state.status == WeatherStatus.initial) {
         final weather = await _weatherRepository.getWeather();
+        final cityName =
+            await getCityNameFromCoordinates(weather.lat, weather.lon);
         return emit(state.copyWith(
           status: WeatherStatus.success,
           weather: weather,
+          cityName: cityName,
         ));
       }
     } catch (e) {

@@ -8,17 +8,21 @@ abstract class WeatherState {
 
   WeatherStatus get status => WeatherStatus.initial;
   WeatherModel? get weather => null;
+  String? get cityName => null;
 
-  WeatherState copyWith({WeatherStatus? status, WeatherModel? weather}) {
+  WeatherState copyWith(
+      {WeatherStatus? status, WeatherModel? weather, String? cityName}) {
     return Weather(
       status: status ?? this.status,
       weather: weather ?? this.weather,
+      cityName: cityName ?? this.cityName,
     );
   }
 }
 
 class Weather extends WeatherState {
-  const Weather({this.status = WeatherStatus.initial, this.weather});
+  const Weather(
+      {this.status = WeatherStatus.initial, this.weather, this.cityName});
 
   @override
   final WeatherStatus status;
@@ -27,13 +31,18 @@ class Weather extends WeatherState {
   final WeatherModel? weather;
 
   @override
+  final String? cityName;
+
+  @override
   WeatherState copyWith({
     WeatherStatus? status,
     WeatherModel? weather,
+    String? cityName,
   }) {
     return Weather(
       status: status ?? this.status,
       weather: weather ?? this.weather,
+      cityName: cityName ?? this.cityName,
     );
   }
 
