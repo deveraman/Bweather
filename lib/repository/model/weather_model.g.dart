@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: non_constant_identifier_names
-
 part of 'weather_model.dart';
 
 // **************************************************************************
@@ -106,6 +104,33 @@ const _$DescriptionEnumMap = {
   Description.SNOW: 'snow',
   Description.LIGHT_SNOW: 'light snow',
   Description.LIGHT_RAIN: 'light rain',
+  Description.THUNDERSTORM_LIGHT_RAIN: 'thunderstorm with light rain',
+  Description.THUNDERSTORM_RAIN: 'thunderstorm with rain',
+  Description.THUNDERSTORM_HEAVY_RAIN: 'thunderstorm with heavy rain',
+  Description.LIGHT_THUNDERSTORM: 'light thunderstorm',
+  Description.THUNDERSTORM: 'thunderstorm',
+  Description.HEAVY_THUNDERSTORM: 'heavy thunderstorm',
+  Description.RAGGED_THUNDERSTORM: 'ragged thunderstorm',
+  Description.THUNDERSTORM_LIGHT_DRIZZLE: 'thunderstorm with light drizzle',
+  Description.THUNDERSTORM_DRIZZLE: 'thunderstorm with drizzle',
+  Description.THUNDERSTORM_HEAVY_DRIZZLE: 'thunderstorm with heavy drizzle',
+  Description.SMOKE: 'smoke',
+  Description.SAND_DUST: 'sand/ dust whirls',
+  Description.FOG: 'fog',
+  Description.SAND: 'sand',
+  Description.DUST: 'dust',
+  Description.VOLCANIC_ASH: 'volcanic ash',
+  Description.SQUALLS: 'squalls',
+  Description.TORNADO: 'tornado',
+  Description.HEAVY_SNOW: 'heavy snow',
+  Description.SLEET: 'sleet',
+  Description.SLEET_SHOWER_LIGHT: 'light shower sleet',
+  Description.SLEET_SHOWER: 'shower sleet',
+  Description.LIGHT_RAIN_SNOW: 'light rain and snow',
+  Description.RAIN_SNOW: 'rain and snow',
+  Description.LIGHT_SHOWER_SNOW: 'light shower snow',
+  Description.SHOWER_SNOW: 'shower snow',
+  Description.HEAVY_SHOWER_SNOW: 'heavy shower snow',
 };
 
 const _$MainEnumMap = {
@@ -114,7 +139,16 @@ const _$MainEnumMap = {
   Main.RAIN: 'Rain',
   Main.HAZE: 'Haze',
   Main.MIST: 'Mist',
-  Main.Snow: 'Snow',
+  Main.SNOW: 'Snow',
+  Main.THUNDERSTORM: 'Thunderstorm',
+  Main.DRIZZLE: 'Drizzle',
+  Main.SMOKE: 'Smoke',
+  Main.DUST: 'Dust',
+  Main.FOG: 'Fog',
+  Main.SAND: 'Sand',
+  Main.ASH: 'Ash',
+  Main.SQUALL: 'Squall',
+  Main.TORNADO: 'Tornado',
 };
 
 _$_Daily _$$_DailyFromJson(Map<String, dynamic> json) => _$_Daily(

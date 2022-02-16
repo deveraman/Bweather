@@ -86,7 +86,61 @@ enum Description {
   @JsonValue("light snow")
   LIGHT_SNOW,
   @JsonValue("light rain")
-  LIGHT_RAIN
+  LIGHT_RAIN,
+  @JsonValue("thunderstorm with light rain")
+  THUNDERSTORM_LIGHT_RAIN,
+  @JsonValue("thunderstorm with rain")
+  THUNDERSTORM_RAIN,
+  @JsonValue("thunderstorm with heavy rain")
+  THUNDERSTORM_HEAVY_RAIN,
+  @JsonValue("light thunderstorm")
+  LIGHT_THUNDERSTORM,
+  @JsonValue("thunderstorm")
+  THUNDERSTORM,
+  @JsonValue("heavy thunderstorm")
+  HEAVY_THUNDERSTORM,
+  @JsonValue("ragged thunderstorm")
+  RAGGED_THUNDERSTORM,
+  @JsonValue("thunderstorm with light drizzle")
+  THUNDERSTORM_LIGHT_DRIZZLE,
+  @JsonValue("thunderstorm with drizzle")
+  THUNDERSTORM_DRIZZLE,
+  @JsonValue("thunderstorm with heavy drizzle")
+  THUNDERSTORM_HEAVY_DRIZZLE,
+  @JsonValue("smoke")
+  SMOKE,
+  @JsonValue("sand/ dust whirls")
+  SAND_DUST,
+  @JsonValue("fog")
+  FOG,
+  @JsonValue("sand")
+  SAND,
+  @JsonValue("dust")
+  DUST,
+  @JsonValue("volcanic ash")
+  VOLCANIC_ASH,
+  @JsonValue("squalls")
+  SQUALLS,
+  @JsonValue("tornado")
+  TORNADO,
+  @JsonValue("heavy snow")
+  HEAVY_SNOW,
+  @JsonValue("sleet")
+  SLEET,
+  @JsonValue("light shower sleet")
+  SLEET_SHOWER_LIGHT,
+  @JsonValue("shower sleet")
+  SLEET_SHOWER,
+  @JsonValue("light rain and snow")
+  LIGHT_RAIN_SNOW,
+  @JsonValue("rain and snow")
+  RAIN_SNOW,
+  @JsonValue("light shower snow")
+  LIGHT_SHOWER_SNOW,
+  @JsonValue("shower snow")
+  SHOWER_SNOW,
+  @JsonValue("heavy shower snow")
+  HEAVY_SHOWER_SNOW,
 }
 
 enum Main {
@@ -101,7 +155,25 @@ enum Main {
   @JsonValue('Mist')
   MIST,
   @JsonValue('Snow')
-  Snow
+  SNOW,
+  @JsonValue('Thunderstorm')
+  THUNDERSTORM,
+  @JsonValue('Drizzle')
+  DRIZZLE,
+  @JsonValue('Smoke')
+  SMOKE,
+  @JsonValue('Dust')
+  DUST,
+  @JsonValue('Fog')
+  FOG,
+  @JsonValue('Sand')
+  SAND,
+  @JsonValue('Ash')
+  ASH,
+  @JsonValue('Squall')
+  SQUALL,
+  @JsonValue('Tornado')
+  TORNADO,
 }
 
 @freezed
