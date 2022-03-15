@@ -2,7 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 
-// TODO: replace these with animated icons, Preferably Rive or Lottie
 const weatherIconConfig = <String, IconData>{
   "CLEAR_SKY": FontAwesomeIcons.sun,
   "FEW_CLOUDS": FontAwesomeIcons.cloudSun,

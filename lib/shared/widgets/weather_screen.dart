@@ -91,26 +91,7 @@ class WeatherScreen extends StatelessWidget {
                             : height * 0.25,
                       ),
                     ),
-                  ), // Positioned(
-                  //   top: orientation == Orientation.landscape
-                  //       ? height * 0.1
-                  //       : height * 0.15,
-                  //   left: orientation == Orientation.landscape
-                  //       ? width * 0.3
-                  //       : width <= 370
-                  //           ? width * 0.2
-                  //           : width * 0.12,
-                  //   // TODO: Make this dynamic and react to weather condition,
-                  //   // If possible have it animated or gradient at least.
-                  //   child: FaIcon(
-                  //     getIconFromWeather(
-                  //         weatherData.current.weather.first.description.name),
-                  //     color: MyTheme.eerieBlack,
-                  //     size: orientation == Orientation.landscape
-                  //         ? height * 0.5
-                  //         : height * 0.28,
-                  //   ),
-                  // ),
+                  ),
                   RotatedBox(
                     quarterTurns: orientation == Orientation.landscape ? 4 : 1,
                     child: Row(
@@ -181,10 +162,6 @@ class WeatherScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Constants.gap10w,
-                                // TODO: Make this dynamic,
-                                // Based on the temperature change icon
-                                // FontAwesome has multiple icons for different
-                                // conditions and temperature ranges.
                                 FaIcon(
                                   getIconFromTemp(int.parse(weatherData
                                       .current.temp

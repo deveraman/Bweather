@@ -3,6 +3,13 @@
 A cross platform beautiful weather app built using flutter and best practices to ensure scaleability and performance. 
 
 ## Screenshots
+<p align="center">
+  <img width="32%" src="screenshots/flutter_01.png?raw=true">
+  <img width="32%" src="screenshots/flutter_02.png?raw=true">
+  <img width="32%" src="screenshots/flutter_03.png?raw=true">
+  <img width="32%" src="screenshots/flutter_04.png?raw=true">
+  <img width="32%" src="screenshots/flutter_05.png?raw=true">
+</p>
 
 ## Plugins
 
