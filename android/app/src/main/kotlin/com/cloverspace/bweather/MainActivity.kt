@@ -1,4 +1,4 @@
-package com.r2k.flutter_templates
+package com.cloverspace.bweather
 
 import io.flutter.embedding.android.FlutterActivity
 
