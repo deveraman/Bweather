@@ -1,0 +1,9 @@
+name: bweather
+repository: https://github.com/ramanverma2k/Bweather
+
+packages:
+  - packages/**
+
+scripts:
+  analyze:
+    exec: dart analyze .
