@@ -19,7 +19,7 @@ class Weather with _$Weather {
         required List<Minutely> minutely,
         required List<Current> hourly,
         required List<Daily> daily,
-        required List<Alert> alerts,
+        required List<Alert>? alerts,
     }) = _Weather;
 
     factory Weather.fromJson(Map<String, dynamic> json) => _$WeatherFromJson(json);
