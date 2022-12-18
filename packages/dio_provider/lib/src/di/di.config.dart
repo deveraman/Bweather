@@ -24,12 +24,18 @@ extension GetItInjectableX on _i1.GetIt {
       environmentFilter,
     );
     final dioProvider = _$DioProvider();
+    gh.lazySingleton<_i3.Dio>(() => dioProvider.dio(
+          gh<String>(instanceName: 'BaseUrl'),
+          gh<Map<String, dynamic>>(instanceName: 'Headers'),
+        ));
+    gh.factory<Map<String, dynamic>>(
+      () => dioProvider.headers,
+      instanceName: 'Headers',
+    );
     gh.factory<String>(
       () => dioProvider.baseUrl,
       instanceName: 'BaseUrl',
     );
-    gh.lazySingleton<_i3.Dio>(
-        () => dioProvider.dio(gh<String>(instanceName: 'BaseUrl')),);
     return this;
   }
 }

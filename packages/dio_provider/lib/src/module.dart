@@ -6,10 +6,18 @@ abstract class DioProvider {
   @Named("BaseUrl")
   String get baseUrl => "";
 
-  @lazySingleton
-  Dio dio(@Named("BaseUrl") String url) {
-    final baseOptions = BaseOptions(baseUrl: url);
+  @Named("Headers")
+  Map<String, dynamic> get headers => {};
 
-    return Dio(baseOptions);
-  }
+  @lazySingleton
+  Dio dio([
+    @Named("BaseUrl") String? url,
+    @Named("Headers") Map<String, dynamic>? header,
+  ]) =>
+      Dio(
+        BaseOptions(
+          baseUrl: url ?? baseUrl,
+          headers: header ?? headers,
+        ),
+      );
 }
