@@ -1,5 +1,5 @@
-import 'package:test/test.dart';
 import 'package:sports_repository/src/models/sports.dart';
+import 'package:test/test.dart';
 
 void main() {
   final response = {
