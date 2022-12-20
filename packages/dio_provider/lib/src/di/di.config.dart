@@ -24,10 +24,7 @@ extension GetItInjectableX on _i1.GetIt {
       environmentFilter,
     );
     final dioProvider = _$DioProvider();
-    gh.lazySingleton<_i3.Dio>(() => dioProvider.dio(
-          gh<String>(instanceName: 'BaseUrl'),
-          gh<Map<String, dynamic>>(instanceName: 'Headers'),
-        ));
+    gh.lazySingleton<_i3.Dio>(() => dioProvider.dio());
     gh.factory<Map<String, dynamic>>(
       () => dioProvider.headers,
       instanceName: 'Headers',
