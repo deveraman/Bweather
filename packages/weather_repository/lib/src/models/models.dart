@@ -1,6 +1,7 @@
 export 'alert/alert.dart';
 export 'aqi/aqi.dart';
 export 'astro/astro.dart';
+export 'astro/astronomy.dart';
 export 'condition/condition.dart';
 export 'current/current.dart';
 export 'day/day.dart';

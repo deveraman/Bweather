@@ -4,6 +4,6 @@ abstract class WeatherRepository {
   String apiKey = '';
 
   Future<Weather> getWeather();
-  Future<Astro> getAstronomy();
+  Future<Astronomy> getAstronomy();
   Future<List<ForecastDay>> getForecastForDays({int days = 5});
 }

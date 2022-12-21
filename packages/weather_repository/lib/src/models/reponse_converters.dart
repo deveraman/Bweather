@@ -50,8 +50,12 @@ class AlertsConverter
 
   @override
   Map<String, dynamic> toJson(List<Alert> alerts) => {
-    "alert": alerts.map((e) => e.toJson(),).toList(),
-  };
+        "alert": alerts
+            .map(
+              (e) => e.toJson(),
+            )
+            .toList(),
+      };
 }
 
 class ForecastConverter
@@ -76,5 +80,21 @@ class ForecastConverter
               (e) => e.toJson(),
             )
             .toList(),
+      };
+}
+
+class AstroConverter implements JsonConverter<Astro, Map<String, dynamic>> {
+  const AstroConverter();
+
+  @override
+  Astro fromJson(Map<String, dynamic> json) {
+    final data = json["astro"] as Map<String, dynamic>;
+
+    return Astro.fromJson(data);
+  }
+
+  @override
+  Map<String, dynamic> toJson(Astro astro) => {
+        "astro": astro.toJson(),
       };
 }
