@@ -3,6 +3,8 @@ import 'package:injectable/injectable.dart';
 
 @module
 abstract class DioProvider {
+  const DioProvider();
+
   @Named("BaseUrl")
   String get baseUrl => "";
 
@@ -10,8 +12,7 @@ abstract class DioProvider {
   Map<String, dynamic> get headers => {};
 
   @lazySingleton
-  Dio dio() =>
-      Dio(
+  Dio dio() => Dio(
         BaseOptions(
           baseUrl: baseUrl,
           headers: headers,

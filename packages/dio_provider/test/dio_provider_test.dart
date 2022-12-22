@@ -1,43 +1,55 @@
 import 'package:dio/dio.dart';
 import 'package:dio_provider/src/di/di.dart';
-import 'package:dio_provider/src/interceptors/error_interceptor.dart';
+import 'package:dio_provider/src/module.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-void main() {
-  late Dio dio;
+@GenerateNiceMocks([
+  MockSpec<HttpClientAdapter>(),
+])
+import 'dio_provider_test.mocks.dart';
 
-  group('Dependency', () {
+class FakeDioProvider extends Fake implements DioProvider {
+  @override
+  Dio dio() {
+    return getIt.get<Dio>();
+  }
+}
+
+void main() {
+  late FakeDioProvider fakeDioProvider;
+  late MockHttpClientAdapter mockHttpClientAdapter;
+
+  setUpAll(() {
+    mockHttpClientAdapter = MockHttpClientAdapter();
+    fakeDioProvider = FakeDioProvider();
+  });
+
+  group('DioProvider', () {
     setUp(() {
       configureDioModule();
-      dio = getIt.get<Dio>();
+      getIt.get<Dio>().httpClientAdapter = mockHttpClientAdapter;
       getIt.reset();
     });
 
-    test('Dio registers', () {
-      expect(dio, isNotNull);
-    });
-
-    test('Dio is of type Dio', () {
-      expect(dio, isA<Dio>());
-    });
-
-    test('Can be updated', () {
-      expect(dio.options.baseUrl, equals(""));
-
-      dio.options.baseUrl = "https://google.com";
-
-      expect(dio.options.baseUrl, equals("https://google.com"));
-    });
-
-    test('Registered & modified instances are same', () {
-      final newDio = dio;
-
-      newDio.interceptors.add(ErrorInterceptor());
-
-      expect(
-        dio.interceptors.hashCode,
-        equals(newDio.interceptors.hashCode),
+    test('makes request', () async {
+      final responseBody = ResponseBody.fromString("hi", 200);
+      when(
+        mockHttpClientAdapter.fetch(any, any, any),
+      ).thenAnswer(
+        (_) async => responseBody,
       );
+
+      final expected = Response(
+        data: "hi",
+        statusCode: 200,
+        requestOptions: RequestOptions(path: "/test"),
+      );
+
+      final result = await fakeDioProvider.dio().get("/test");
+
+      expect(expected.data, equals(result.data));
     });
   });
 }
