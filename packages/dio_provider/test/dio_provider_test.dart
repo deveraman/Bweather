@@ -4,34 +4,40 @@ import 'package:dio_provider/src/interceptors/error_interceptor.dart';
 import 'package:test/test.dart';
 
 void main() {
-  setUpAll(() {
-    configureDioModule();
-  });
+  late Dio dio;
 
-  test('Dio registers', () {
-    expect(getIt.get<Dio>(), isNotNull);
-  });
+  group('Dependency', () {
+    setUp(() {
+      configureDioModule();
+      dio = getIt.get<Dio>();
+      getIt.reset();
+    });
 
-  test('Dio is of type Dio', () {
-    expect(getIt.get<Dio>(), isA<Dio>());
-  });
+    test('Dio registers', () {
+      expect(dio, isNotNull);
+    });
 
-  test('Can be updated', () {
-    expect(getIt.get<Dio>().options.baseUrl, equals(""));
+    test('Dio is of type Dio', () {
+      expect(dio, isA<Dio>());
+    });
 
-    getIt.get<Dio>().options.baseUrl = "https://google.com";
+    test('Can be updated', () {
+      expect(dio.options.baseUrl, equals(""));
 
-    expect(getIt.get<Dio>().options.baseUrl, equals("https://google.com"));
-  });
+      dio.options.baseUrl = "https://google.com";
 
-  test('Registered & modified instances are same', () {
-    final newDio = getIt.get<Dio>();
+      expect(dio.options.baseUrl, equals("https://google.com"));
+    });
 
-    newDio.interceptors.add(ErrorInterceptor());
+    test('Registered & modified instances are same', () {
+      final newDio = dio;
 
-    expect(
-      getIt.get<Dio>().interceptors.hashCode,
-      equals(newDio.interceptors.hashCode),
-    );
+      newDio.interceptors.add(ErrorInterceptor());
+
+      expect(
+        dio.interceptors.hashCode,
+        equals(newDio.interceptors.hashCode),
+      );
+    });
   });
 }
