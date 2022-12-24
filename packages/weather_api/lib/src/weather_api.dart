@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio_provider/dio_provider.dart';
 import 'package:weather_api/src/env.dart';
 import 'package:weather_repository/weather_repository.dart';
@@ -33,73 +31,63 @@ class WeatherApi implements DioProvider, WeatherRepository {
 
   @override
   Future<Weather> getWeather() async {
-    try {
-      final res = await dio().get(
-        "/forecast.json",
-        queryParameters: {
-          "q": "London",
-          "days": 5,
-          "alerts": "yes",
-          "aqi": "yes",
-        },
-      ).then(
-        (body) => body.data.toString(),
-      );
+    final res = await dio().get<Map<String, dynamic>>(
+      "/forecast.json",
+      queryParameters: {
+        "q": "London",
+        "days": 5,
+        "alerts": "yes",
+        "aqi": "yes",
+      },
+    );
 
-      final json = jsonDecode(res) as Map<String, dynamic>;
-
-      return Weather.fromJson(json);
-    } on DioError catch (_) {
-      rethrow;
+    if (res.data == null || res.data!.isEmpty) {
+      throw Exception("Invalid response data");
     }
+
+    return Weather.fromJson(res.data!);
   }
 
   @override
   Future<Astronomy> getAstronomy() async {
-    try {
-      final res = await dio().get(
-        "/astronomy.json",
-        queryParameters: {
-          "q": "London",
-        },
-      ).then(
-        (body) => body.data.toString(),
-      );
+    final res = await dio().get<Map<String, dynamic>>(
+      "/astronomy.json",
+      queryParameters: {
+        "q": "London",
+      },
+    );
 
-      final json = jsonDecode(res) as Map<String, dynamic>;
-
-      return Astronomy.fromJson(json);
-    } on Exception catch (_) {
-      rethrow;
+    if (res.data == null || res.data!.isEmpty) {
+      throw Exception("Invalid response data");
     }
+
+    return Astronomy.fromJson(res.data!);
   }
 
   @override
   Future<List<ForecastDay>> getForecastForDays({int days = 5}) async {
-    try {
-      final res = await dio().get(
-        "/forecast.json",
-        queryParameters: {
-          "q": "London",
-          "days": days,
-          "alerts": "yes",
-          "aqi": "yes",
-        },
-      ).then(
-        (body) => body.data.toString(),
-      );
+    final res = await dio().get<Map<String, dynamic>>(
+      "/forecast.json",
+      queryParameters: {
+        "q": "London",
+        "days": days,
+        "alerts": "yes",
+        "aqi": "yes",
+      },
+    );
 
-      final json = jsonDecode(res) as Map<String, dynamic>;
-
-      final forecasts = json["forecast"] as Map<String, dynamic>;
-
-      return (forecasts["forecastday"] as List<dynamic>)
-          .map(
-            (e) => ForecastDay.fromJson(e as Map<String, dynamic>),
-          )
-          .toList();
-    } on Exception catch (_) {
-      rethrow;
+    if (res.data == null || res.data!.isEmpty) {
+      throw Exception("Invalid response data");
     }
+
+    final json = res.data!["forecast"] as Map<String, dynamic>;
+
+    final forecasts = json["forecastday"] as List<dynamic>;
+
+    return forecasts
+        .map(
+          (day) => ForecastDay.fromJson(day as Map<String, dynamic>),
+        )
+        .toList();
   }
 }

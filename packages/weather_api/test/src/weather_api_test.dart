@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio_provider/dio_provider.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -54,8 +56,17 @@ void main() {
   group('WeatherApi getWeather()', () {
     setUp(() {
       configureDioModule();
+      weatherApi = WeatherApi();
       mockHttpClientAdapter = MockHttpClientAdapter();
       getIt.get<Dio>().httpClientAdapter = mockHttpClientAdapter;
+      getIt.get<Dio>().interceptors.add(InterceptorsWrapper(
+        onResponse: (response, handler) {
+          if (response.requestOptions.method == "GET") {
+            response.data = jsonDecode(response.data as String);
+          }
+          return handler.next(response);
+        },
+      ),);
       getIt.reset();
     });
 
@@ -80,13 +91,32 @@ void main() {
 
       expect(weatherApi.getWeather(), throwsException);
     });
+
+    test('throws Exception on empty response', () async {
+      final responseBody = ResponseBody.fromString({}.toString(), 200);
+
+      when(mockHttpClientAdapter.fetch(any, any, any)).thenAnswer(
+        (_) async => responseBody,
+      );
+
+      expect(weatherApi.getWeather(), throwsException);
+    });
   });
 
   group('WeatherApi getAstronomy()', () {
     setUp(() {
       configureDioModule();
+      weatherApi = WeatherApi();
       mockHttpClientAdapter = MockHttpClientAdapter();
       getIt.get<Dio>().httpClientAdapter = mockHttpClientAdapter;
+      getIt.get<Dio>().interceptors.add(InterceptorsWrapper(
+        onResponse: (response, handler) {
+          if (response.requestOptions.method == "GET") {
+            response.data = jsonDecode(response.data as String);
+          }
+          return handler.next(response);
+        },
+      ),);
       getIt.reset();
     });
 
@@ -111,13 +141,32 @@ void main() {
 
       expect(weatherApi.getAstronomy(), throwsException);
     });
+
+    test('throws Exception on empty response', () async {
+      final responseBody = ResponseBody.fromString({}.toString(), 200);
+
+      when(mockHttpClientAdapter.fetch(any, any, any)).thenAnswer(
+        (_) async => responseBody,
+      );
+
+      expect(weatherApi.getAstronomy(), throwsException);
+    });
   });
 
   group('WeatherApi getForecastForDays()', () {
     setUp(() {
       configureDioModule();
+      weatherApi = WeatherApi();
       mockHttpClientAdapter = MockHttpClientAdapter();
       getIt.get<Dio>().httpClientAdapter = mockHttpClientAdapter;
+      getIt.get<Dio>().interceptors.add(InterceptorsWrapper(
+        onResponse: (response, handler) {
+          if (response.requestOptions.method == "GET") {
+            response.data = jsonDecode(response.data as String);
+          }
+          return handler.next(response);
+        },
+      ),);
       getIt.reset();
     });
 
@@ -135,6 +184,16 @@ void main() {
 
     test('throws Exception on Status Code 404 ', () async {
       final responseBody = ResponseBody.fromString("Not Found", 404);
+
+      when(mockHttpClientAdapter.fetch(any, any, any)).thenAnswer(
+        (_) async => responseBody,
+      );
+
+      expect(weatherApi.getForecastForDays(), throwsException);
+    });
+
+    test('throws Exception on empty response', () async {
+      final responseBody = ResponseBody.fromString({}.toString(), 200);
 
       when(mockHttpClientAdapter.fetch(any, any, any)).thenAnswer(
         (_) async => responseBody,

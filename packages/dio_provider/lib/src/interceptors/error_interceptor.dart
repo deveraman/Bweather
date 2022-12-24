@@ -1,4 +1,4 @@
-import 'package:dio_provider/dio_provider.dart';
+import 'package:dio/dio.dart';
 import 'package:dio_provider/src/exceptions/exceptions.dart';
 
 class ErrorInterceptor extends Interceptor {
