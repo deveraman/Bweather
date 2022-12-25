@@ -2,11 +2,9 @@ import 'package:envied/envied.dart';
 
 part 'env.g.dart';
 
-@Envied()
+// ignore: avoid_classes_with_only_static_members
+@Envied(obfuscate: true)
 abstract class Env {
-  @EnviedField(
-    varName: 'WEATHER_API_KEY',
-    obfuscate: true,
-  )
-  static const key = _Env.key;
+  @EnviedField(varName: "WEATHER_API_KEY")
+  static final key = _Env.key;
 }

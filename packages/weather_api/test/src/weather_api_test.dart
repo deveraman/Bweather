@@ -30,12 +30,8 @@ void main() {
       expect(weatherApi.baseUrl, equals("https://api.weatherapi.com/v1/"));
     });
 
-    test('overrides headers', () {
-      expect(weatherApi.headers, equals({}));
-    });
-
     test('overrides dio()', () {
-      expect(weatherApi.dio(), isA<Dio>());
+      expect(weatherApi.dio, isA<Dio>());
     });
 
     test('Dio is configured with BaseOptions', () {
@@ -46,7 +42,7 @@ void main() {
         },
       );
 
-      final result = weatherApi.dio().options;
+      final result = weatherApi.dio.options;
 
       expect(expectedOptions.baseUrl, result.baseUrl);
       expect(expectedOptions.queryParameters, result.queryParameters);

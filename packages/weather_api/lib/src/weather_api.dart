@@ -2,36 +2,41 @@ import 'package:dio_provider/dio_provider.dart';
 import 'package:weather_api/src/env.dart';
 import 'package:weather_repository/weather_repository.dart';
 
-class WeatherApi implements DioProvider, WeatherRepository {
-  @override
-  String apiKey = Env.key;
+class WeatherApi implements DioModule, WeatherRepository {
+  const WeatherApi({this.dioClient});
+
+  final Dio? dioClient;
 
   @override
   String get baseUrl => "https://api.weatherapi.com/v1/";
 
   @override
-  Map<String, dynamic> get headers => {};
+  String get apiKey => Env.key;
 
   @override
-  Dio dio() {
+  Dio get dio {
+    if (dioClient != null) {
+      return dioClient!;
+    }
+
     final dio = getIt.get<Dio>();
 
-    final baseOptions = BaseOptions(
-      baseUrl: baseUrl,
-      queryParameters: {
+    dio.options
+      ..baseUrl = baseUrl
+      ..queryParameters = {
         "key": apiKey,
-      },
-    );
+      };
 
-    dio.options = baseOptions;
-    dio.interceptors.add(ErrorInterceptor());
+    dio.interceptors.add(
+      ErrorInterceptor(),
+    );
 
     return dio;
   }
 
   @override
   Future<Weather> getWeather() async {
-    final res = await dio().get<Map<String, dynamic>>(
+    final res = await dio.get<Map<String, dynamic>>(
       "/forecast.json",
       queryParameters: {
         "q": "London",
@@ -50,7 +55,7 @@ class WeatherApi implements DioProvider, WeatherRepository {
 
   @override
   Future<Astronomy> getAstronomy() async {
-    final res = await dio().get<Map<String, dynamic>>(
+    final res = await dio.get<Map<String, dynamic>>(
       "/astronomy.json",
       queryParameters: {
         "q": "London",
@@ -66,7 +71,7 @@ class WeatherApi implements DioProvider, WeatherRepository {
 
   @override
   Future<List<ForecastDay>> getForecastForDays({int days = 5}) async {
-    final res = await dio().get<Map<String, dynamic>>(
+    final res = await dio.get<Map<String, dynamic>>(
       "/forecast.json",
       queryParameters: {
         "q": "London",

@@ -1,7 +1,7 @@
 import 'package:weather_repository/src/models/models.dart';
 
 abstract class WeatherRepository {
-  String apiKey = '';
+  final String apiKey = '';
 
   Future<Weather> getWeather();
   Future<Astronomy> getAstronomy();
