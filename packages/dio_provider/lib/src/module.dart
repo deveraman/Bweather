@@ -2,20 +2,11 @@ import 'package:dio_provider/dio_provider.dart';
 import 'package:injectable/injectable.dart';
 
 @module
-abstract class DioProvider {
-  const DioProvider();
+abstract class DioModule {
+  const DioModule();
 
-  @Named("BaseUrl")
-  String get baseUrl => "";
-
-  @Named("Headers")
-  Map<String, dynamic> get headers => {};
+  String get baseUrl => '';
 
   @lazySingleton
-  Dio dio() => Dio(
-        BaseOptions(
-          baseUrl: baseUrl,
-          headers: headers,
-        ),
-      );
+  Dio get dio => Dio();
 }

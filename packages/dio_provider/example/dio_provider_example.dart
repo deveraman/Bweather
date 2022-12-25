@@ -1,21 +1,15 @@
 import 'package:dio_provider/dio_provider.dart';
 
-class ExampleApi implements DioProvider {
+class ExampleApi implements DioModule {
   @override
   String get baseUrl => "http://worldtimeapi.org/api/timezone/";
 
   @override
-  Map<String, dynamic> get headers => {
-        Headers.contentTypeHeader: ResponseType.json,
-      };
-
-  @override
-  Dio dio() {
+  Dio get dio {
     final dio = getIt.get<Dio>();
 
     dio.options = BaseOptions(
       baseUrl: baseUrl,
-      headers: headers,
     );
 
     dio.interceptors.add(
@@ -27,7 +21,7 @@ class ExampleApi implements DioProvider {
 
   Future<Map<String, dynamic>> getResponse() async {
     try {
-      final res = await dio().get("/Asia/Kolkata");
+      final res = await dio.get("/Asia/Kolkata");
       if (res.statusCode == 200) {
         return res.data as Map<String, dynamic>;
       }

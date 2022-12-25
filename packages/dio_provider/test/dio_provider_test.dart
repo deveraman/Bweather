@@ -10,30 +10,42 @@ import 'package:test/test.dart';
 ])
 import 'dio_provider_test.mocks.dart';
 
-class FakeDioProvider extends Fake implements DioProvider {
+class FakeDioProvider extends Fake implements DioModule {
+  FakeDioProvider({this.instance});
+
+  final Dio? instance;
+
   @override
-  Dio dio() {
-    return getIt.get<Dio>();
-  }
+  Dio get dio => instance ?? getIt.get<Dio>();
 }
 
 void main() {
   late FakeDioProvider fakeDioProvider;
   late MockHttpClientAdapter mockHttpClientAdapter;
+  late Dio dio;
 
   setUpAll(() {
     mockHttpClientAdapter = MockHttpClientAdapter();
     fakeDioProvider = FakeDioProvider();
   });
 
-  group('DioProvider', () {
+  group('DioModule', () {
     setUp(() {
       configureDioModule();
-      getIt.get<Dio>().httpClientAdapter = mockHttpClientAdapter;
+      dio = getIt.get<Dio>();
+      dio.httpClientAdapter = mockHttpClientAdapter;
       getIt.reset();
     });
 
-    test('makes request', () async {
+    test('can provide our own Dio client', () {
+      final newDio = Dio();
+      final newFakeDioProvider = FakeDioProvider(instance: newDio);
+
+      expect(newFakeDioProvider.dio, equals(newDio));
+      expect(dio, isNot(equals(newDio)));
+    });
+
+    test('can make request', () async {
       final responseBody = ResponseBody.fromString("hi", 200);
       when(
         mockHttpClientAdapter.fetch(any, any, any),
@@ -47,7 +59,7 @@ void main() {
         requestOptions: RequestOptions(path: "/test"),
       );
 
-      final result = await fakeDioProvider.dio().get("/test");
+      final result = await fakeDioProvider.dio.get("/test");
 
       expect(expected.data, equals(result.data));
     });

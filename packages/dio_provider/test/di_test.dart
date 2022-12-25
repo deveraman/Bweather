@@ -37,13 +37,5 @@ void main() {
         equals(newDio.interceptors.hashCode),
       );
     });
-
-    test('di registers headers instance', () {
-      expect(getIt.get<Map<String, dynamic>>(instanceName: "Headers"), equals({}));
-    });
-
-    test('di registers BaseUrl instance', () {
-      expect(getIt.get<String>(instanceName: "BaseUrl"), equals(""));
-    });
   });
 }
