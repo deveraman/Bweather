@@ -1,3 +1,6 @@
+> **Note**
+> Further development of this project has been stopped see [#1](https://github.com/deveraman/Bweather/issues/1)
+
 # Bweather
 
 A cross platform beautiful weather app built using flutter and best practices to ensure scaleability and performance. 
